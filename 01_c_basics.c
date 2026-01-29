@@ -5,92 +5,80 @@ we want to review the basics of programming in C:
 - printing output to the console
 - conditional statements (if else)
 - control structures (switch case, loops)
--arrays
+- arrays
 */
 #include <stdio.h>
 
 int main() {
-    /* ===============================
-       VARIABLE DECLARATION & INITIALIZATION
-       =============================== */
-    int age = 0;
-    float height = 0.0;
-    char grade = ' ';
-    
-    /* ===============================
-       TAKING INPUT FROM THE USER
-       =============================== */
-    printf("Enter your age: ");
-    scanf("%d", &age);
+    //variable declaration and initialization
+    // int age = 0;
+    // float height = 0.0;
+    // char grade = ' ';
 
-    printf("Enter your height (in meters): ");
-    scanf("%f", &height);
+    // printf("Enter your age: ");
+    // scanf("%d", &age);
 
-    printf("Enter your grade (A, B, C, D, F): ");
-    scanf(" %c", &grade);  // space before %c avoids newline issues
+    // printf("Enter your height in meters (e.g., 1.75): ");
+    // scanf("%f", &height);
 
-    /* ===============================
-       PRINTING OUTPUT
-       =============================== */
-    printf("\n--- User Information ---\n");
-    printf("Age: %d\n", age);
-    printf("Height: %.2f meters\n", height);
-    printf("Grade: %c\n", grade);
+    // printf("Enter your grade (A, B, C, D, F): ");
+    // scanf(" %c", &grade);
 
-    /* ===============================
-       IF-ELSE STATEMENTS
-       =============================== */
-    if (age < 18) {
-        printf("Status: Minor\n");
-    } else {
-        printf("Status: Adult\n");
-    }
+    // //printing output to the console
+    // printf("== User Information ==\n");
+    // printf("Age: %d years\n", age);
+    // printf("Height: %.2f meters\n", height);
+    // printf("Grade: %c\n", grade);
 
-    /* ===============================
-       SWITCH STATEMENT
-       =============================== */
-    switch (grade) {
-        case 'A':
-            printf("Excellent work!\n");
-            break;
-        case 'B':
-            printf("Good job!\n");
-            break;
-        case 'C':
-            printf("Fair performance.\n");
-            break;
-        case 'D':
-            printf("Needs improvement.\n");
-            break;
-        case 'F':
-            printf("Failed.\n");
-            break;
-        default:
-            printf("Invalid grade entered.\n");
-    }
+    // //if else conditional statement: minor/adult/senior citizen
+    // if(age < 18){
+    //     printf("You are a minor.\n");
+    // } else if(age >= 18 && age < 60){
+    //     printf("You are an adult.\n");
+    // } else {
+    //     printf("You are a senior citizen.\n");
+    // }
 
-    /* ===============================
-       ARRAYS & LOOPS
-       =============================== */
+    // //switch case: grade interpretation
+    // switch(grade){
+    //     case 'A':
+    //         printf("Excellent!\n");
+    //         break;
+    //     case 'B':
+    //         printf("Very Good!\n");
+    //         break;
+    //     case 'C':
+    //         printf("Good!\n");
+    //         break;
+    //     case 'D':
+    //         printf("Pass!\n");
+    //         break;
+    //     case 'F':
+    //         printf("Fail!\n");
+    //         break;
+    //     default:
+    //         printf("Invalid grade entered.\n");
+    // }
+
+    //arrays
     int scores[5];
     int sum = 0;
 
-    printf("\nEnter 5 test scores:\n");
-
-    for (int i = 0; i < 5; i++) {
-        printf("Score %d: ", i + 1);
+    for(int i = 0; i < 5; i++){
+        printf("Enter score %d: ", i + 1);
         scanf("%d", &scores[i]);
         sum += scores[i];
     }
 
-    float average = sum / 5.0;
-
-    printf("\nScores entered: ");
-    for (int i = 0; i < 5; i++) {
+    //output all the elements
+    for(int i = 0; i < 5; i++){
         printf("%d ", scores[i]);
     }
 
+    float average = sum / 5.0;
     printf("\nAverage score: %.2f\n", average);
+
+    
 
     return 0;
 }

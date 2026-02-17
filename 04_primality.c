@@ -37,8 +37,8 @@ int isPrime3(int n){
 
 int main() {
     int n = 67;
-    printf("%d", isPrime1(n));
-    printf("%d", isPrime2(n));
-    printf("%d", isPrime3(n));
+    printf("%d\n", isPrime1(n));
+    printf("%d\n", isPrime2(n));
+    printf("%d\n", isPrime3(n));
     return 0;
 }

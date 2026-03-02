@@ -13,7 +13,7 @@ int main() {
     printf("in main: %d\n", x);
     
     int arr[5] = {1,67,3,4,5};
-    //a pointer is just a variable = a memory address
+    //a pointer is just a variable that holds a memory address
     printf("%d", *(arr + 1)); //1
 
     return 0;

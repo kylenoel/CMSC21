@@ -15,10 +15,9 @@ typedef struct LinkedList{
 void printList(LinkedList *list){
     Node *current = list->head;
     while(current != NULL){
-        printf("%d, ", current->data);
+        printf("%d\n", current->data);
         current = current->next;
     }
-    printf("\n");
 }
 
 //insert at head
@@ -26,18 +25,75 @@ void insertAtHead(LinkedList *l, int data){
     Node *newNode = malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = l->head;
-    l->head = newNode; //67
+    l->head = newNode;
 
-    if(l->tail == NULL){ //list is empty to begin with
+    if(l->tail == NULL){
         l->tail = newNode;
     }
 }
+
 //insert at tail (append)
+void append(LinkedList *l, int data){
+    Node *newNode = malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if(l->head == NULL){
+        l->head = newNode;
+        l->tail = newNode;
+    } else {
+        l->tail->next = newNode;
+        l->tail = newNode;
+    }
+}
+
 //insert at position
+void insertAtPosition(LinkedList *l, int data, int position){
+    if(position == 0){
+        insertAtHead(l, data);
+        return;
+    }
+
+    Node *newNode = malloc(sizeof(Node));
+    newNode->data = data;
+
+    Node *current = l->head;
+    for(int i = 0; i < position - 1 && current != NULL; i++){
+        current = current->next;
+    }
+
+    if(current == NULL){
+        // Position is out of bounds
+        free(newNode);
+        return;
+    }
+
+    newNode->next = current->next;
+    current->next = newNode;
+
+    if(newNode->next == NULL){
+        l->tail = newNode;
+    }
+}
+
 //delete head
+void deleteHead(LinkedList *l){
+    if(l->head == NULL){
+        return; // List is empty
+    }
+
+    Node *temp = l->head;
+    l->head = l->head->next;
+    free(temp);
+
+    if(l->head == NULL){
+        l->tail = NULL; // List is now empty
+    }
+}
 //delete tail
 //delete at position
 //search
+
 
 int main() {
 
@@ -62,7 +118,7 @@ int main() {
 
     LinkedList l; //{10, 20, 30}
     l.head = firstNode;
-    l.tail = thirdNode; 
+    l.tail = thirdNode;
 
     printList(&l);
 

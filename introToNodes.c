@@ -18,12 +18,6 @@ void initList(LinkedList *list){
     list->size = 0;
 }
 
-void initList(LinkedList *list){
-    list->head = NULL;
-    list->tail = NULL;
-    list->size = 0;
-}
-
 //traverse and print
 void printList(LinkedList *list){
     Node *current = list->head;

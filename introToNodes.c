@@ -18,6 +18,13 @@ void initList(LinkedList *list){
     list->size = 0;
 }
 
+void initList(LinkedList *list){
+    list->head = NULL;
+    list->tail = NULL;
+    list->size = 0;
+}
+
+//traverse and print
 void printList(LinkedList *list){
     Node *current = list->head;
     while(current != NULL){
@@ -77,6 +84,7 @@ void insertAtPosition(LinkedList *list, int data, int p){
     Node *current = list->head;
     int count = 0;
     for(count = 0; count < p-1 && current != NULL; count++){
+        printf("%d, ", current->data);
         current = current->next;
     }
     newNode->next = current->next;

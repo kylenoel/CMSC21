@@ -3,7 +3,7 @@
 
 typedef struct Node{
     int data;
-    struct Node *next;
+    struct Node *next, *prev;
 }Node;
 
 typedef struct LinkedList{
@@ -32,6 +32,10 @@ void insertAtHead(LinkedList *list, int data){
     Node *newNode = malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = list->head;
+    newNode->prev = NULL;
+    if(list->head != NULL){
+        list->head->prev = newNode;
+    }
     list->head = newNode;
 
     if(list->tail == NULL){
@@ -45,8 +49,11 @@ void append(LinkedList *list, int data){
     Node *newNode = malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = NULL;
+    newNode->prev = list->tail;
 
-    list->tail->next = newNode;
+    if(list->tail != NULL){ //in the case that the list is not empty, we need to update the old tail's next pointer
+        list->tail->next = newNode;
+    }
     list->tail = newNode;
 
     if(list->head == NULL){
@@ -74,6 +81,7 @@ void insertAtPosition(LinkedList *list, int data, int p){
     Node *newNode = malloc(sizeof(Node)); //NULL
     newNode->data = data;
     newNode->next = NULL;
+    newNode->prev = NULL;
 
     Node *current = list->head;
     int count = 0;
@@ -82,6 +90,10 @@ void insertAtPosition(LinkedList *list, int data, int p){
         current = current->next;
     }
     newNode->next = current->next;
+    newNode->prev = current;
+    if(current->next != NULL){ // in the case where the list is not empty, we need to update the old next's prev pointer
+        current->next->prev = newNode;
+    }
     current->next = newNode;
 
     list->size++;
@@ -95,23 +107,40 @@ void deleteHead(LinkedList *list){
     }
     Node *temp = list->head;
     list->head = list->head->next;
+    if(list->head != NULL){
+        list->head->prev = NULL;
+    }
     free(temp);
     list->size--;
 }
 //delete tail
 void deleteTail(LinkedList *list){
-    if(list->tail == NULL){
-        printf("List is empty\n");
-        return;
-    }
-    Node *current = list->head;
-    while(current->next != list->tail){
-        current = current->next;
-    }
-    free(list->tail);
-    current->next = NULL;
-    list->tail = current;
-    list->size--;
+    // if(list->tail == NULL){
+    //     printf("List is empty\n");
+    //     return;
+    // }
+    // Node *current = list->head;
+    // while(current->next != list->tail){
+    //     current = current->next;
+    // }
+    // free(list->tail);
+    // current->next = NULL;
+    // list->tail = current;
+    // if(list->tail != NULL){
+    //     list->tail->prev = NULL;
+    // }
+    // list->size--;
+        if(list->tail == NULL){
+            printf("List is empty\n");
+            return;
+        }
+        Node *temp = list->tail;
+        list->tail = list->tail->prev;
+        if(list->tail != NULL){//in the case where there are more than 0 nodes left
+            list->tail->next = NULL;
+        }
+        free(temp);
+        list->size--;
 }
 //delete at position p
 
